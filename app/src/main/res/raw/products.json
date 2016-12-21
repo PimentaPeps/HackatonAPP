@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "guid": "fe49f433-a467-43e1-ae5d-fa843f925551",
+      "name": "Sushi",
+      "price": "10.00",
+      "image": "sushi"
+    },
+    {
+      "guid": "fe49f433-a467-43e1-ae5d-fa843f925552",
+      "name": "Niguiri",
+      "price": "12.00",
+      "image": "sushi"
+    },
+    {
+      "guid": "fe49f433-a467-43e1-ae5d-fa843f925553",
+      "name": "Temaki",
+      "price": "15.00",
+      "image": "sushi"
+    }
+  ]
+}
