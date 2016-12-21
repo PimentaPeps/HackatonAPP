@@ -29,9 +29,6 @@ public class FragmentProducts extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_products, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) fragmentView.findViewById(R.id.fab);
-        fab.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
-
         return fragmentView;
     }
 }

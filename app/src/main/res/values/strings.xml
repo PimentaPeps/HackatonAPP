@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="video_image">Video Image</string>
     <string name="resumo_da_conta">Resumo da conta</string>
-    <string name="produtos">Produtos</string>
+    <string name="produtos">Meus Serviços</string>
     <string name="comprar">Adicionar ao carrinho</string>
     <string name="preco">Preço: R$</string>
     <string name="quantity">Quantidade:</string>
@@ -50,4 +50,8 @@
         <item>29</item>
         <item>30</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
