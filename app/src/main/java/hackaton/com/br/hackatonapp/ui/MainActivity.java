@@ -37,27 +37,18 @@ public class MainActivity extends AppCompatActivity
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
-        //mDrawer.setStatusBarBackgroundColor(getResources().getColor(holo_orange_dark));
-
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
         startRobot();
-        //Gustavo
-//        final Context context = this;
-//
-//        ((EditText)findViewById(R.id.contentMainTextBox)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE
-//                        || event.getAction() == KeyEvent.ACTION_DOWN) {
-//                    final NetworkAsyncTask asyncTask = new NetworkAsyncTask(context);
-//                    asyncTask.execute();
-//                }
-//                return true;
-//            }
-//        });
 
+        UserViewFragment userViewFragment = new UserViewFragment();
+        // Insert the fragment by replacing any existing fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentMainFrameLayout, userViewFragment)
+                .commit();
+
+        mNavigationView.setCheckedItem(R.id.nav_user_view);
     }
 
     private void startRobot(){
@@ -111,7 +102,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_products) {
+        if (id == R.id.nav_user_view) {
+            UserViewFragment userViewFragment = new UserViewFragment();
+            // Insert the fragment by replacing any existing fragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentMainFrameLayout, userViewFragment)
+                    .commit();
+
+            mNavigationView.setCheckedItem(R.id.nav_user_view);
+            setTitle(item.getTitle());
+        } else if (id == R.id.nav_products) {
             FragmentProducts fragmentProducts = new FragmentProducts();
             // Insert the fragment by replacing any existing fragment
             getSupportFragmentManager().beginTransaction()
@@ -122,21 +122,6 @@ public class MainActivity extends AppCompatActivity
 //            mNavigationView.setCheckedItem(R.id.nav_streamers);
             setTitle(item.getTitle());
 
-        } else if (id == R.id.nav_view) {
-//            FragmentProducts fragmentStreamers = new FragmentProducts();
-//            Bundle args = new Bundle();
-//            args.putInt(FragmentProducts.ARG_PLANET_NUMBER, position);
-//            fragment.setArguments(args);
-//
-//            // Insert the fragment by replacing any existing fragment
-//            FragmentManager fragmentManager = getFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.content_frame, fragment)
-//                    .commit();
-//
-//            // Highlight the selected item, update the title, and close the drawer
-//            mNavigationView.setItemChecked(position, true);
-//            setTitle(mPlanetTitles[position]);
         } else if (id == R.id.nav_feed) {
             FragmentFeed fragmentFeed = new FragmentFeed();
             Bundle bundle = new Bundle();
@@ -151,11 +136,9 @@ public class MainActivity extends AppCompatActivity
 //            // Highlight the selected item, update the title, and close the drawer
 //            mNavigationView.setCheckedItem(R.id.nav_streamers);
             setTitle(item.getTitle());
-
         } else if (id == R.id.nav_settings) {
 
         }
-
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
