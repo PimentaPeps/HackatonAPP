@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,27 +126,37 @@ public class UserViewFragment extends Fragment implements AdapterView.OnItemClic
         if (((TextView) view.findViewById(R.id.alerta_titulo)).getText().toString().contains("cheque"))
             intent = new Intent(getContext(), ChequeDevolvidoActivity.class);
 
-        final Intent finalIntent = intent;
 
-        new AlertDialog.Builder(getContext())
-                .setTitle("Encaminhando..")
-                .setMessage(((TextView) view.findViewById(R.id.alerta_titulo)).getText().toString())
-                .setPositiveButton("sim", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (finalIntent != null) {
+        if (((TextView) view.findViewById(R.id.alerta_titulo)).getText().toString().contains("telefonico")) {
+            FragmentChat fragmentChat = new FragmentChat();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.contentMainFrameLayout, fragmentChat);
+            fragmentTransaction.commit();
+        }
+
+
+        final Intent finalIntent = intent;
+        if (finalIntent != null) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Encaminhando..")
+                    .setMessage(((TextView) view.findViewById(R.id.alerta_titulo)).getText().toString())
+                    .setPositiveButton("sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
                             getActivity().finish();
                             startActivity(finalIntent);
                         }
-                    }
-                })
-                .setNegativeButton("não", new DialogInterface.OnClickListener() {
-                    @TargetApi(Build.VERSION_CODES.KITKAT)
-                    public void onClick(DialogInterface dialog, int which) {
-                        json_alertas.remove(i);
-                        lv.setAdapter(new AlertaAdapter(getContext(), retorna_alertas(json_alertas)));
-                    }
-                })
-                .setIcon(R.drawable.alert_red)
-                .show();
+                    })
+                    .setNegativeButton("não", new DialogInterface.OnClickListener() {
+                        @TargetApi(Build.VERSION_CODES.KITKAT)
+                        public void onClick(DialogInterface dialog, int which) {
+                            json_alertas.remove(i);
+                            lv.setAdapter(new AlertaAdapter(getContext(), retorna_alertas(json_alertas)));
+                        }
+                    })
+                    .setIcon(R.drawable.alert_red)
+                    .show();
+        }
     }
 }

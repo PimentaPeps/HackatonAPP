@@ -1,9 +1,5 @@
 package hackaton.com.br.hackatonapp;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.List;
-
 /**
  * Created by User on 7/10/2014.
  */

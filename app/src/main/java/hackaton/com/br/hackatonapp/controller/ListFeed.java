@@ -2,7 +2,10 @@ package hackaton.com.br.hackatonapp.controller;
 
 import android.content.Context;
 
-import hackaton.com.br.hackatonapp.R;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 import hackaton.com.br.hackatonapp.adapters.FrameComponentAdapter;
 import hackaton.com.br.hackatonapp.network.core.youtuberesponse.YouTubeResponse;
 import hackaton.com.br.hackatonapp.ui.core.FrameComponent;
@@ -12,9 +15,6 @@ import hackaton.com.br.hackatonapp.volley.Response;
 import hackaton.com.br.hackatonapp.volley.StringRequest;
 import hackaton.com.br.hackatonapp.volley.Volley;
 import hackaton.com.br.hackatonapp.volley.VolleyError;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 
 /**

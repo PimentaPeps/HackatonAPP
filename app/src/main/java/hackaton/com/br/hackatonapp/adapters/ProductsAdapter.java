@@ -8,14 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.dao.ImageDAO;
 import hackaton.com.br.hackatonapp.ui.HorizontalPicker;
 import hackaton.com.br.hackatonapp.ui.MainActivity;
 import hackaton.com.br.hackatonapp.ui.core.products.Product;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gustefr on 23/03/2016.

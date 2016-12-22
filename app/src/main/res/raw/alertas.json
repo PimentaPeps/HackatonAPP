@@ -19,12 +19,6 @@
       "action": "novasenhacartao"
     },
     {
-      "mensagem": "Sua conta foi acessada por outro dispositivo. Clique aqui caso não reconheça essa atividade.",
-      "tipo": "Aviso",
-      "prioridade": "3",
-      "action": "outrodisposivito.png"
-    },
-    {
       "mensagem": "Verificamos que o seu atendimento telefonico foi interrompido. Deseja continuar por aqui?",
       "tipo": "Chat",
       "prioridade": "1",

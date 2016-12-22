@@ -25,15 +25,12 @@ public class TrocarSenhaActivity extends AppCompatActivity implements View.OnCli
         if (status_changer == 0) {
             status_changer = 1;
             ((ImageButton) findViewById(R.id.imageButton_novasenhacartao)).setImageResource(R.drawable.novasenhacartao2);
-            Intent i = new Intent(this, this.getClass());
-            finish();
-            startActivity(i);
         }
 
         if (status_changer == 1) {
             Intent i = new Intent(this, MainActivity.class);
-            finish();
             startActivity(i);
+            finish();
         }
     }
 }

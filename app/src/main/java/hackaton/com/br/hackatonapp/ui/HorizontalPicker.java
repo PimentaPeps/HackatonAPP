@@ -51,10 +51,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EdgeEffect;
 import android.widget.OverScroller;
 
-import hackaton.com.br.hackatonapp.R;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import hackaton.com.br.hackatonapp.R;
 
 /**
  * Created by Blaž Šolar on 24/01/14.
@@ -72,67 +72,46 @@ public class HorizontalPicker extends View {
      * The the duration for adjusting the selector wheel.
      */
     private static final int SELECTOR_ADJUSTMENT_DURATION_MILLIS = 800;
-
+    private final int overscrollDistance;
+    private final PickerTouchHelper touchHelper;
     /**
      * Determines speed during touch scrolling.
      */
     private VelocityTracker mVelocityTracker;
-
     /**
      * @see android.view.ViewConfiguration#getScaledMinimumFlingVelocity()
      */
     private int mMinimumFlingVelocity;
-
     /**
      * @see android.view.ViewConfiguration#getScaledMaximumFlingVelocity()
      */
     private int maximumFlingVelocity;
-
-    private final int overscrollDistance;
-
     private int touchSlop;
-
     private CharSequence[] values;
     private BoringLayout[] layouts;
-
     private TextPaint textPaint;
     private BoringLayout.Metrics boringMetrics;
     private TextUtils.TruncateAt ellipsize;
-
     private int itemWidth;
     private RectF itemClipBounds;
     private RectF itemClipBoundsOffset;
-
     private float lastDownEventX;
-
     private OverScroller flingScrollerX;
     private OverScroller adjustScrollerX;
-
     private int previousScrollerX;
-
     private boolean scrollingX;
     private int pressedItem = -1;
-
     private ColorStateList textColor;
-
     private OnItemSelected onItemSelected;
     private OnItemClicked onItemClicked;
-
     private int selectedItem;
-
     private EdgeEffect leftEdgeEffect;
     private EdgeEffect rightEdgeEffect;
-
     private Marquee marquee;
     private int marqueeRepeatLimit = 3;
-
     private float dividerSize = 0;
-
     private int sideItems = 1;
-
     private TextDirectionHeuristicCompat textDir;
-
-    private final PickerTouchHelper touchHelper;
 
     public HorizontalPicker(Context context) {
         this(context, null);
@@ -1055,13 +1034,13 @@ public class HorizontalPicker extends View {
 
     public interface OnItemSelected {
 
-        public void onItemSelected(int index);
+        void onItemSelected(int index);
 
     }
 
     public interface OnItemClicked {
 
-        public void onItemClicked(int index);
+        void onItemClicked(int index);
 
     }
 
@@ -1083,9 +1062,8 @@ public class HorizontalPicker extends View {
 
         private final WeakReference<HorizontalPicker> mView;
         private final WeakReference<Layout> mLayout;
-
-        private byte mStatus = MARQUEE_STOPPED;
         private final float mScrollUnit;
+        private byte mStatus = MARQUEE_STOPPED;
         private float mMaxScroll;
         private float mMaxFadeScroll;
         private float mGhostStart;
@@ -1230,6 +1208,17 @@ public class HorizontalPicker extends View {
 
     public static class SavedState extends BaseSavedState {
 
+        @SuppressWarnings("hiding")
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
         private int mSelItem;
 
         public SavedState(Parcelable superState) {
@@ -1255,18 +1244,6 @@ public class HorizontalPicker extends View {
                     + " selItem=" + mSelItem
                     + "}";
         }
-
-        @SuppressWarnings("hiding")
-        public static final Parcelable.Creator<SavedState> CREATOR
-                = new Parcelable.Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 
     private static class PickerTouchHelper extends ExploreByTouchHelper {

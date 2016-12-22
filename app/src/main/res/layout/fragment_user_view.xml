@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,8 +6,9 @@
     tools:context=".ui.UserViewFragment">
 
     <TableLayout
+        android:id="@+id/tablelayout_tela_inicial"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TableRow
             android:layout_width="match_parent"
@@ -23,11 +24,9 @@
 
         </TableRow>
 
-
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <TextView
                 android:id="@+id/textView3"
@@ -48,16 +47,15 @@
                 app:srcCompat="@android:color/black" />
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableRow_msgs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ListView
-                android:id="@+id/lista_alertas"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableRow>
     </TableLayout>
 
-</FrameLayout>
+
+    <ListView
+        android:id="@+id/lista_alertas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tablelayout_tela_inicial" />
+
+</RelativeLayout>

@@ -2,15 +2,11 @@ package hackaton.com.br.hackatonapp.network.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 
 import java.io.IOException;
 
 import hackaton.com.br.hackatonapp.Client;
 import hackaton.com.br.hackatonapp.controller.Global;
-import hackaton.com.br.hackatonapp.controller.ListFeed;
 import hackaton.com.br.hackatonapp.ui.MainActivity;
 
 /**

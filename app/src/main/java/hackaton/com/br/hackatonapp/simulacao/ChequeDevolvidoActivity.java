@@ -21,7 +21,7 @@ public class ChequeDevolvidoActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         Intent i = new Intent(this, MainActivity.class);
-        finish();
         startActivity(i);
+        finish();
     }
 }

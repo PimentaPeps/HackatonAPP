@@ -12,22 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
-
-import hackaton.com.br.hackatonapp.Client;
 import hackaton.com.br.hackatonapp.MagicParameters;
 import hackaton.com.br.hackatonapp.PandorabotsAPI;
 import hackaton.com.br.hackatonapp.R;
-import hackaton.com.br.hackatonapp.controller.Global;
 import hackaton.com.br.hackatonapp.network.async.NetworkAsyncTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NavigationView mNavigationView;
-    private DrawerLayout mDrawer;
     public boolean local = true;
     String client_name;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +112,6 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
             mNavigationView.setCheckedItem(R.id.nav_user_view);
-            setTitle(item.getTitle());
-        } else if (id == R.id.nav_products) {
-            FragmentProducts fragmentProducts = new FragmentProducts();
-            // Insert the fragment by replacing any existing fragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentMainFrameLayout, fragmentProducts)
-                    .commit();
-
-//            // Highlight the selected item, update the title, and close the drawer
-//            mNavigationView.setCheckedItem(R.id.nav_streamers);
             setTitle(item.getTitle());
 
         } else if (id == R.id.nav_feed) {

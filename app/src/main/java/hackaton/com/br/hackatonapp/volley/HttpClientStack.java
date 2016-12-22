@@ -17,6 +17,7 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ import java.util.Map;
  * An HttpStack that performs request over an {@link HttpClient}.
  */
 public class HttpClientStack implements HttpStack {
-    protected final HttpClient mClient;
     private final static String HEADER_CONTENT_TYPE = "Content-Type";
+    protected final HttpClient mClient;
     public HttpClientStack(HttpClient client) {
         mClient = client;
     }
@@ -44,21 +45,7 @@ public class HttpClientStack implements HttpStack {
         }
         return result;
     }
-    @Override
-    public HttpResponse performRequest(Request<?> request, Map<String, String> additionalHeaders)
-            throws IOException, AuthFailureError {
-        HttpUriRequest httpRequest = createHttpRequest(request, additionalHeaders);
-        addHeaders(httpRequest, additionalHeaders);
-        addHeaders(httpRequest, request.getHeaders());
-        onPrepareRequest(httpRequest);
-        HttpParams httpParams = httpRequest.getParams();
-        int timeoutMs = request.getTimeoutMs();
-        // TODO: Reevaluate this connection timeout based on more wide-scale
-        // data collection and possibly different for wifi vs. 3G.
-        HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
-        HttpConnectionParams.setSoTimeout(httpParams, timeoutMs);
-        return mClient.execute(httpRequest);
-    }
+
     /**
      * Creates the appropriate subclass of HttpUriRequest for passed in request.
      */
@@ -114,6 +101,7 @@ public class HttpClientStack implements HttpStack {
                 throw new IllegalStateException("Unknown request method.");
         }
     }
+
     private static void setEntityIfNonEmptyBody(HttpEntityEnclosingRequestBase httpRequest,
                                                 Request<?> request) throws AuthFailureError {
         byte[] body = request.getBody();
@@ -122,6 +110,23 @@ public class HttpClientStack implements HttpStack {
             httpRequest.setEntity(entity);
         }
     }
+
+    @Override
+    public HttpResponse performRequest(Request<?> request, Map<String, String> additionalHeaders)
+            throws IOException, AuthFailureError {
+        HttpUriRequest httpRequest = createHttpRequest(request, additionalHeaders);
+        addHeaders(httpRequest, additionalHeaders);
+        addHeaders(httpRequest, request.getHeaders());
+        onPrepareRequest(httpRequest);
+        HttpParams httpParams = httpRequest.getParams();
+        int timeoutMs = request.getTimeoutMs();
+        // TODO: Reevaluate this connection timeout based on more wide-scale
+        // data collection and possibly different for wifi vs. 3G.
+        HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
+        HttpConnectionParams.setSoTimeout(httpParams, timeoutMs);
+        return mClient.execute(httpRequest);
+    }
+
     /**
      * Called before the request is executed using the underlying HttpClient.
      *

@@ -21,7 +21,7 @@ public class TransferenciaActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         Intent i = new Intent(this, MainActivity.class);
-        finish();
         startActivity(i);
+        finish();
     }
 }

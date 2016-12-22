@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.model.ChatMessage;

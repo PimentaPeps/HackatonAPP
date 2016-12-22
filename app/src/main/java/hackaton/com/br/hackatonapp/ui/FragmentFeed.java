@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.regex.Matcher;
@@ -14,7 +13,6 @@ import java.util.regex.Pattern;
 
 import hackaton.com.br.hackatonapp.DoRequest;
 import hackaton.com.br.hackatonapp.R;
-import hackaton.com.br.hackatonapp.adapters.FeedAdapter;
 import hackaton.com.br.hackatonapp.controller.Global;
 
 /**

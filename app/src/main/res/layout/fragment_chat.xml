@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/botResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
-        android:text="@string/chat_title"
-        android:singleLine="true"
         android:layout_margin="10sp"
+        android:singleLine="true"
+        android:text="@string/chat_title"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
         android:textSize="30sp"
         android:textStyle="normal|bold" />
 
     <ListView
+        android:id="@+id/listViewChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/listViewChat" />
+        android:layout_weight="1" />
 
     <EditText
+        android:id="@+id/botText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:ems="10"
-        android:id="@+id/botText"
         android:hint="@string/chat_hint"
-        android:backgroundTint="@android:color/holo_orange_light" />
+        android:inputType="textPersonName" />
 
     <Button
-        android:text="Enviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/buttonBot"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:textColorLink="@android:color/holo_orange_dark"
-        android:backgroundTint="@android:color/holo_orange_dark" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Enviar"
+        android:textColorLink="@android:color/holo_orange_dark" />
 
 </LinearLayout>

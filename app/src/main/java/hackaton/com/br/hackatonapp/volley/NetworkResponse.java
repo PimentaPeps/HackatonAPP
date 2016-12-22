@@ -1,12 +1,33 @@
 package hackaton.com.br.hackatonapp.volley;
 
 import org.apache.http.HttpStatus;
+
 import java.util.Collections;
 import java.util.Map;
 /**
  * Data and headers returned from {@link Network#performRequest(Request)}.
  */
 public class NetworkResponse {
+    /**
+     * The HTTP status code.
+     */
+    public final int statusCode;
+    /**
+     * Raw data from this response.
+     */
+    public final byte[] data;
+    /**
+     * Response headers.
+     */
+    public final Map<String, String> headers;
+    /**
+     * True if the server returned a 304 (Not Modified).
+     */
+    public final boolean notModified;
+    /**
+     * Network roundtrip time in milliseconds.
+     */
+    public final long networkTimeMs;
     /**
      * Creates a new network response.
      * @param statusCode the HTTP status code
@@ -33,14 +54,4 @@ public class NetworkResponse {
     public NetworkResponse(byte[] data, Map<String, String> headers) {
         this(HttpStatus.SC_OK, data, headers, false, 0);
     }
-    /** The HTTP status code. */
-    public final int statusCode;
-    /** Raw data from this response. */
-    public final byte[] data;
-    /** Response headers. */
-    public final Map<String, String> headers;
-    /** True if the server returned a 304 (Not Modified). */
-    public final boolean notModified;
-    /** Network roundtrip time in milliseconds. */
-    public final long networkTimeMs;
 }

@@ -2,11 +2,10 @@ package hackaton.com.br.hackatonapp.controller;
 
 import android.content.Context;
 
-import hackaton.com.br.hackatonapp.R;
+import java.util.List;
+
 import hackaton.com.br.hackatonapp.dao.ProductsDAO;
 import hackaton.com.br.hackatonapp.ui.core.products.Product;
-
-import java.util.List;
 
 /**
  * Created by gustefr on 23/03/2016.

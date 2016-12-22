@@ -2,38 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/alerta_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Descricao do alerta"
-        android:textSize="10pt"
-        android:textStyle="bold" />
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/alerta_imagem_notificacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/alerta_canal_resolucao"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_weight="1"
         app:srcCompat="?android:attr/listChoiceIndicatorSingle" />
 
-    <TextView
-        android:id="@+id/alerta_canal_resolucao"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/alerta_titulo"
-        android:layout_weight="1"
-        android:text="canal de resolucao"
-        android:textSize="8pt" />
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/alerta_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Descricao do alerta"
+            android:textSize="8pt"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/alerta_canal_resolucao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/alerta_titulo"
+            android:layout_weight="1"
+            android:text="canal de resolucao"
+            android:textSize="6pt" />
+    </LinearLayout>
 
 </RelativeLayout>

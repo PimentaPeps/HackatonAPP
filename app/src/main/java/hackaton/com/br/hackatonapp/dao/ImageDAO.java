@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.volley.ImageRequest;
 import hackaton.com.br.hackatonapp.volley.RequestQueue;
 import hackaton.com.br.hackatonapp.volley.Response;
