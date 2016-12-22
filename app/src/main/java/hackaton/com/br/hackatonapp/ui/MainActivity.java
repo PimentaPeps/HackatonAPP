@@ -11,17 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import hackaton.com.br.hackatonapp.DoRequest;
 import hackaton.com.br.hackatonapp.MagicParameters;
 import hackaton.com.br.hackatonapp.PandorabotsAPI;
 import hackaton.com.br.hackatonapp.R;
-
-import static android.R.color.holo_orange_dark;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

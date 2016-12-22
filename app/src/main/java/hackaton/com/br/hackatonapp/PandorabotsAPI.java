@@ -1,30 +1,23 @@
 package hackaton.com.br.hackatonapp;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 
 public class PandorabotsAPI {
 
@@ -66,7 +59,7 @@ public class PandorabotsAPI {
 
     public String talk(String botname, String input) {
         return debugBot(botname, input, false, false, false, false);
-    }   
+    }
 
     public String debugBot(String botname, String input, boolean reset, boolean trace, boolean recent , boolean createCustId) {
         String response = "";
@@ -83,7 +76,12 @@ public class PandorabotsAPI {
             if (reset) nameValuePairs.add(new BasicNameValuePair("reset", "true"));
 //            if (trace) nameValuePairs.add(new BasicNameValuePair("trace", "true"));
             if (recent) nameValuePairs.add(new BasicNameValuePair("recent", "true"));
-            HttpEntity entity = new UrlEncodedFormEntity(nameValuePairs);
+
+            String entityValue = URLEncodedUtils.format(nameValuePairs, HTTP.UTF_8);
+            StringEntity entity = new StringEntity(entityValue, HTTP.UTF_8);
+            entity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+
+            //HttpEntity entity = new UrlEncodedFormEntity(nameValuePairs);
             request.setEntity(entity);
             HttpResponse httpResp = client.execute(request);
             String jsonStringResponse = readResponse(httpResp);
@@ -93,8 +91,8 @@ public class PandorabotsAPI {
             response = response.trim();
             sessionid = jsonObj.getString("sessionid");
             if (createCustId) {
-            	client_name = sessionid;
-            	return client_name;
+                client_name = sessionid;
+                return client_name;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -104,5 +102,3 @@ public class PandorabotsAPI {
 
     }
 }
-
-
