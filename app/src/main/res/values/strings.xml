@@ -54,9 +54,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_trocar_senha">TrocarSenhaActivity</string>
-
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="chat_title">Chat com atendente</string>
+    <string name="chat_hint">Comece conversando por aqui...</string>
+    <string name="chat_voce">Você:</string>
+    <string name="chat_atendente">Atendente:</string>
 </resources>

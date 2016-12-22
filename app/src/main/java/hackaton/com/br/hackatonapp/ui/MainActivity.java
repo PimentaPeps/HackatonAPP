@@ -12,9 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
+import hackaton.com.br.hackatonapp.Client;
 import hackaton.com.br.hackatonapp.MagicParameters;
 import hackaton.com.br.hackatonapp.PandorabotsAPI;
 import hackaton.com.br.hackatonapp.R;
+import hackaton.com.br.hackatonapp.controller.Global;
+import hackaton.com.br.hackatonapp.network.async.NetworkAsyncTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +46,8 @@ public class MainActivity extends AppCompatActivity
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
         startRobot();
-
+        NetworkAsyncTask networkAsyncTask = new NetworkAsyncTask(this);
+        networkAsyncTask.execute();
         UserViewFragment userViewFragment = new UserViewFragment();
         // Insert the fragment by replacing any existing fragment
         getSupportFragmentManager().beginTransaction()
@@ -136,8 +142,17 @@ public class MainActivity extends AppCompatActivity
 //            // Highlight the selected item, update the title, and close the drawer
 //            mNavigationView.setCheckedItem(R.id.nav_streamers);
             setTitle(item.getTitle());
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.chat) {
+            FragmentChat fragmentChat = new FragmentChat();
 
+            // Insert the fragment by replacing any existing fragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentMainFrameLayout, fragmentChat)
+                    .commit();
+
+//            // Highlight the selected item, update the title, and close the drawer
+//            mNavigationView.setCheckedItem(R.id.nav_streamers);
+            setTitle(item.getTitle());
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
