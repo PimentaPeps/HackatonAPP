@@ -1,0 +1,34 @@
+{
+  "notificacao": [
+    {
+      "mensagem": "Houve uma tentativa de \ntransferência sem sucesso devido a informações do favorecido. Clique aqui para corrigir os dados",
+      "tipo": "Aviso",
+      "prioridade": "2",
+      "action": "tranferencia.png"
+    },
+    {
+      "mensagem": "Verifiquei que houve um cheque devolvido na sua conta. Clique aqui para conversar com o seu gerente.",
+      "tipo": "Aviso",
+      "prioridade": "1",
+      "action": "mensagemgerente"
+    },
+    {
+      "mensagem": "A senha do cartão xxx está bloqueada. Clique aqui para desbloqueio.",
+      "tipo": "Aviso",
+      "prioridade": "2",
+      "action": "novasenhacartao"
+    },
+    {
+      "mensagem": "Sua conta foi acessada por outro dispositivo. Clique aqui caso não reconheça essa atividade.",
+      "tipo": "Aviso",
+      "prioridade": "3",
+      "action": "outrodisposivito.png"
+    },
+    {
+      "mensagem": "Verificamos que o seu atendimento telefonico foi interrompido. Deseja continuar por aqui?",
+      "tipo": "Chat",
+      "prioridade": "1",
+      "action": "Chat"
+    }
+  ]
+}
