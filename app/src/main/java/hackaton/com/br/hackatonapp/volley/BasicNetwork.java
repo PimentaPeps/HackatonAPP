@@ -1,6 +1,7 @@
 package hackaton.com.br.hackatonapp.volley;
 
 import android.os.SystemClock;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -8,6 +9,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.cookie.DateUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -42,6 +44,38 @@ public class BasicNetwork implements Network {
         mHttpStack = httpStack;
         mPool = pool;
     }
+
+    /**
+     * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
+     * request's retry policy, a timeout exception is thrown.
+     *
+     * @param request The request to use.
+     */
+    private static void attemptRetryOnException(String logPrefix, Request<?> request,
+                                                VolleyError exception) throws VolleyError {
+        RetryPolicy retryPolicy = request.getRetryPolicy();
+        int oldTimeout = request.getTimeoutMs();
+        try {
+            retryPolicy.retry(exception);
+        } catch (VolleyError e) {
+            request.addMarker(
+                    String.format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
+            throw e;
+        }
+        request.addMarker(String.format("%s-retry [timeout=%s]", logPrefix, oldTimeout));
+    }
+
+    /**
+     * Converts Headers[] to Map<String, String>.
+     */
+    protected static Map<String, String> convertHeaders(Header[] headers) {
+        Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+        for (int i = 0; i < headers.length; i++) {
+            result.put(headers[i].getName(), headers[i].getValue());
+        }
+        return result;
+    }
+
     @Override
     public NetworkResponse performRequest(Request<?> request) throws VolleyError {
         long requestStart = SystemClock.elapsedRealtime();
@@ -132,6 +166,7 @@ public class BasicNetwork implements Network {
             }
         }
     }
+
     /**
      * Logs requests that took over SLOW_REQUEST_THRESHOLD_MS to complete.
      */
@@ -144,24 +179,7 @@ public class BasicNetwork implements Network {
                     statusLine.getStatusCode(), request.getRetryPolicy().getCurrentRetryCount());
         }
     }
-    /**
-     * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
-     * request's retry policy, a timeout exception is thrown.
-     * @param request The request to use.
-     */
-    private static void attemptRetryOnException(String logPrefix, Request<?> request,
-                                                VolleyError exception) throws VolleyError {
-        RetryPolicy retryPolicy = request.getRetryPolicy();
-        int oldTimeout = request.getTimeoutMs();
-        try {
-            retryPolicy.retry(exception);
-        } catch (VolleyError e) {
-            request.addMarker(
-                    String.format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
-            throw e;
-        }
-        request.addMarker(String.format("%s-retry [timeout=%s]", logPrefix, oldTimeout));
-    }
+
     private void addCacheHeaders(Map<String, String> headers, Cache.Entry entry) {
         // If there's no cache entry, we're done.
         if (entry == null) {
@@ -175,10 +193,12 @@ public class BasicNetwork implements Network {
             headers.put("If-Modified-Since", DateUtils.formatDate(refTime));
         }
     }
+
     protected void logError(String what, String url, long start) {
         long now = SystemClock.elapsedRealtime();
         VolleyLog.v("HTTP ERROR(%s) %d ms to fetch %s", what, (now - start), url);
     }
+
     /** Reads the contents of HttpEntity into a byte[]. */
     private byte[] entityToBytes(HttpEntity entity) throws IOException, ServerError {
         PoolingByteArrayOutputStream bytes =
@@ -207,15 +227,5 @@ public class BasicNetwork implements Network {
             mPool.returnBuf(buffer);
             bytes.close();
         }
-    }
-    /**
-     * Converts Headers[] to Map<String, String>.
-     */
-    protected static Map<String, String> convertHeaders(Header[] headers) {
-        Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-        for (int i = 0; i < headers.length; i++) {
-            result.put(headers[i].getName(), headers[i].getValue());
-        }
-        return result;
     }
 }

@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.ui.core.products.Product;
-
-import java.util.List;
 
 /**
  * Created by gustefr on 23/03/2016.

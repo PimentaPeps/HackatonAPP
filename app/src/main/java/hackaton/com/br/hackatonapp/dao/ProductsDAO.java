@@ -3,6 +3,12 @@ package hackaton.com.br.hackatonapp.dao;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.ui.MainActivity;
 import hackaton.com.br.hackatonapp.ui.core.products.Product;
@@ -13,11 +19,6 @@ import hackaton.com.br.hackatonapp.volley.Response;
 import hackaton.com.br.hackatonapp.volley.StringRequest;
 import hackaton.com.br.hackatonapp.volley.Volley;
 import hackaton.com.br.hackatonapp.volley.VolleyError;
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 /**
  * Created by gustefr on 13/04/2016.

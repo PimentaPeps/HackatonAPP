@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,57 +6,56 @@
     tools:context=".ui.UserViewFragment">
 
     <TableLayout
+        android:id="@+id/tablelayout_tela_inicial"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Olá,"
                 android:textSize="32pt"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
+                android:textStyle="bold" />
 
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-
-            <TextView
-                android:text="Fulano da Silva"
-                android:textSize="18pt"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:color/black"
-                android:id="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Fulano da Silva"
+                android:textSize="18pt" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/tableRow_msgs">
+            android:layout_height="match_parent">
 
-            <ListView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/lista_alertas" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:color/black" />
         </TableRow>
+
     </TableLayout>
 
-</FrameLayout>
+
+    <ListView
+        android:id="@+id/lista_alertas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tablelayout_tela_inicial" />
+
+</RelativeLayout>

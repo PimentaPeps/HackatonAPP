@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="hackaton.com.br.hackatonapp">
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    package="hackaton.com.br.hackatonapp">
 
-<application android:allowBackup="true" android:name="hackaton.com.br.hackatonapp.controller.Global"
-    android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <activity android:name=".SplashActivity" android:theme="@style/SplashTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+    <application
+        android:name=".controller.Global"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".simulacao.TrocarSenhaActivity"
+            android:label="TrocarSenhaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".simulacao.TransferenciaActivity" />
+        <activity android:name=".simulacao.ChequeDevolvidoActivity" />
 
-    <activity android:name=".ui.MainActivity" android:label="@string/app_name" android:theme="@style/AppTheme.NoActionBar">
-    </activity>
-</application>
-
+    </application>
 </manifest>

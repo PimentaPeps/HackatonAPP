@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.ui.core.FrameComponent;
 import hackaton.com.br.hackatonapp.volley.ImageRequest;
@@ -15,8 +17,6 @@ import hackaton.com.br.hackatonapp.volley.RequestQueue;
 import hackaton.com.br.hackatonapp.volley.Response;
 import hackaton.com.br.hackatonapp.volley.Volley;
 import hackaton.com.br.hackatonapp.volley.VolleyError;
-
-import java.util.ArrayList;
 
 /**
  * Created by gustefr on 17/03/2016.

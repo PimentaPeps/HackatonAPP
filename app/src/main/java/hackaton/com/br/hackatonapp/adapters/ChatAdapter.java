@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.model.ChatMessage;

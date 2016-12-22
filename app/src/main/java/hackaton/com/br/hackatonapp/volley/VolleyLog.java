@@ -2,6 +2,7 @@ package hackaton.com.br.hackatonapp.volley;
 
 import android.os.SystemClock;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -78,18 +79,9 @@ public class VolleyLog {
         public static final boolean ENABLED = VolleyLog.DEBUG;
         /** Minimum duration from first marker to last in an marker log to warrant logging. */
         private static final long MIN_DURATION_FOR_LOGGING_MS = 0;
-        private static class Marker {
-            public final String name;
-            public final long thread;
-            public final long time;
-            public Marker(String name, long thread, long time) {
-                this.name = name;
-                this.thread = thread;
-                this.time = time;
-            }
-        }
         private final List<Marker> mMarkers = new ArrayList<Marker>();
         private boolean mFinished = false;
+
         /** Adds a marker to this log with the specified name. */
         public synchronized void add(String name, long threadId) {
             if (mFinished) {
@@ -97,6 +89,7 @@ public class VolleyLog {
             }
             mMarkers.add(new Marker(name, threadId, SystemClock.elapsedRealtime()));
         }
+
         /**
          * Closes the log, dumping it to logcat if the time difference between
          * the first and last markers is greater than {@link #MIN_DURATION_FOR_LOGGING_MS}.
@@ -116,6 +109,7 @@ public class VolleyLog {
                 prevTime = thisTime;
             }
         }
+
         @Override
         protected void finalize() throws Throwable {
             // Catch requests that have been collected (and hence end-of-lifed)
@@ -125,6 +119,7 @@ public class VolleyLog {
                 e("Marker log finalized without finish() - uncaught exit point for request");
             }
         }
+
         /** Returns the time difference between the first and last events in this log. */
         private long getTotalDuration() {
             if (mMarkers.size() == 0) {
@@ -133,6 +128,18 @@ public class VolleyLog {
             long first = mMarkers.get(0).time;
             long last = mMarkers.get(mMarkers.size() - 1).time;
             return last - first;
+        }
+
+        private static class Marker {
+            public final String name;
+            public final long thread;
+            public final long time;
+
+            public Marker(String name, long thread, long time) {
+                this.name = name;
+                this.thread = thread;
+                this.time = time;
+            }
         }
     }
 }

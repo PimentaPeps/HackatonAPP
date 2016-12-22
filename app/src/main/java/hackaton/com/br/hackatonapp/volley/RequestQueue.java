@@ -2,6 +2,7 @@ package hackaton.com.br.hackatonapp.volley;
 
 import android.os.Handler;
 import android.os.Looper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,13 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * a parsed response on the main thread.
  */
 public class RequestQueue {
-    /** Callback interface for completed requests. */
-    public static interface RequestFinishedListener<T> {
-        /** Called when a request has finished processing. */
-        public void onRequestFinished(Request<T> request);
-    }
-    /** Used for generating monotonically-increasing sequence numbers for requests. */
-    private AtomicInteger mSequenceGenerator = new AtomicInteger();
+    /**
+     * Number of network request dispatcher threads to start.
+     */
+    private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
     /**
      * Staging area for requests that already have a duplicate request in flight.
      *
@@ -51,14 +49,16 @@ public class RequestQueue {
     /** The queue of requests that are actually going out to the network. */
     private final PriorityBlockingQueue<Request<?>> mNetworkQueue =
             new PriorityBlockingQueue<Request<?>>();
-    /** Number of network request dispatcher threads to start. */
-    private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
     /** Cache interface for retrieving and storing responses. */
     private final Cache mCache;
     /** Network interface for performing requests. */
     private final Network mNetwork;
     /** Response delivery mechanism. */
     private final ResponseDelivery mDelivery;
+    /**
+     * Used for generating monotonically-increasing sequence numbers for requests.
+     */
+    private AtomicInteger mSequenceGenerator = new AtomicInteger();
     /** The network dispatchers. */
     private NetworkDispatcher[] mDispatchers;
     /** The cache dispatcher. */
@@ -100,6 +100,7 @@ public class RequestQueue {
     public RequestQueue(Cache cache, Network network) {
         this(cache, network, DEFAULT_NETWORK_THREAD_POOL_SIZE);
     }
+
     /**
      * Starts the dispatchers in this queue.
      */
@@ -116,6 +117,7 @@ public class RequestQueue {
             networkDispatcher.start();
         }
     }
+
     /**
      * Stops the cache and network dispatchers.
      */
@@ -129,25 +131,21 @@ public class RequestQueue {
             }
         }
     }
+
     /**
      * Gets a sequence number.
      */
     public int getSequenceNumber() {
         return mSequenceGenerator.incrementAndGet();
     }
+
     /**
      * Gets the {@link Cache} instance being used.
      */
     public Cache getCache() {
         return mCache;
     }
-    /**
-     * A simple predicate or filter interface for Requests, for use by
-     * {@link RequestQueue#cancelAll(RequestFilter)}.
-     */
-    public interface RequestFilter {
-        public boolean apply(Request<?> request);
-    }
+
     /**
      * Cancels all requests in this queue for which the given filter applies.
      * @param filter The filtering function to use
@@ -161,6 +159,7 @@ public class RequestQueue {
             }
         }
     }
+
     /**
      * Cancels all requests in this queue with the given tag. Tag must be non-null
      * and equality is by identity.
@@ -176,6 +175,7 @@ public class RequestQueue {
             }
         });
     }
+
     /**
      * Adds a Request to the dispatch queue.
      * @param request The request to service
@@ -218,6 +218,7 @@ public class RequestQueue {
             return request;
         }
     }
+
     /**
      * Called from {@link Request#finish(String)}, indicating that processing of the given request
      * has finished.
@@ -251,11 +252,13 @@ public class RequestQueue {
             }
         }
     }
+
     public  <T> void addRequestFinishedListener(RequestFinishedListener<T> listener) {
         synchronized (mFinishedListeners) {
             mFinishedListeners.add(listener);
         }
     }
+
     /**
      * Remove a RequestFinishedListener. Has no effect if listener was not previously added.
      */
@@ -263,5 +266,23 @@ public class RequestQueue {
         synchronized (mFinishedListeners) {
             mFinishedListeners.remove(listener);
         }
+    }
+
+    /**
+     * Callback interface for completed requests.
+     */
+    public interface RequestFinishedListener<T> {
+        /**
+         * Called when a request has finished processing.
+         */
+        void onRequestFinished(Request<T> request);
+    }
+
+    /**
+     * A simple predicate or filter interface for Requests, for use by
+     * {@link RequestQueue#cancelAll(RequestFilter)}.
+     */
+    public interface RequestFilter {
+        boolean apply(Request<?> request);
     }
 }
