@@ -1,17 +1,26 @@
 package hackaton.com.br.hackatonapp.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
 import hackaton.com.br.hackatonapp.R;
 import hackaton.com.br.hackatonapp.model.ChatMessage;
+import hackaton.com.br.hackatonapp.network.async.GetThumbnailsAsyncTask;
 
 /**
  * Created by gustefr on 23/03/2016.
@@ -53,10 +62,18 @@ public class ChatAdapter extends BaseAdapter {
             if(getMessageList().get(position).getType() == ChatMessage.Type.send) {
                 v = vi.inflate(R.layout.chat_component_voce, null);
             }
+            if(getMessageList().get(position).getMessage().equals("Você pode aplicar o dinheiro da popança em um Fundo DI")) {
+                v = vi.inflate(R.layout.chat_component_atendente_webview, null);
+                GetThumbnailsAsyncTask asyncTask = new GetThumbnailsAsyncTask(context, (ImageView) v.findViewById(R.id.imageviewchat));
+                asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR );
+
+            }
         }
 
         if (getMessageList().size() > 0) {
-            ((TextView) v.findViewById(R.id.textViewChat)).setText(getMessageList().get(position).getMessage());
+            if(!getMessageList().get(position).getMessage().equals("Você pode aplicar o dinheiro da popança em um Fundo DI")) {
+                ((TextView) v.findViewById(R.id.textViewChat)).setText(getMessageList().get(position).getMessage());
+            }
         }
         else
         {

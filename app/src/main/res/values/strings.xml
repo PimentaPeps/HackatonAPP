@@ -56,6 +56,8 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="chat_title">Chat com atendente</string>
     <string name="chat_hint">Comece conversando por aqui...</string>
+    <string name="assistente_hint">Vamos lá! Faça uma pergunta para mim :)</string>
     <string name="chat_voce">Você:</string>
     <string name="chat_atendente">Atendente:</string>
+    <string name="assistente_title">Assistente Itaú</string>
 </resources>

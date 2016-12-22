@@ -29,17 +29,19 @@
                 android:gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView6"
-                    android:layout_margin="10sp"
-                    android:text="@string/chat_voce" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewChat"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_margin="20sp" />
+
+                <ImageView
+                    android:layout_width="56dp"
+                    app:srcCompat="@drawable/acspike"
+                    android:id="@+id/imageView2"
+                    android:scaleType="fitXY"
+                    android:layout_height="56dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,14 +49,6 @@
                     android:id="@+id/textViewFeedName"
                     android:layout_margin="10sp" />
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="0.7">
 
         </LinearLayout>
 

@@ -21,10 +21,12 @@ public class Global extends MultiDexApplication {
         super();
         orderedProductsGlobal = new ArrayList<>();
         chatMessageList = new ArrayList<>();
+        assistenteMessageList = new ArrayList<>();
     }
     private Client client;
 
     private List<ChatMessage> chatMessageList;
+    private List<ChatMessage> assistenteMessageList;
 
     private List<Product> orderedProductsGlobal;
 
@@ -46,5 +48,13 @@ public class Global extends MultiDexApplication {
 
     public void setChatMessageList(List<ChatMessage> chatMessageList) {
         this.chatMessageList = chatMessageList;
+    }
+
+    public List<ChatMessage> getAssistenteMessageList() {
+        return assistenteMessageList;
+    }
+
+    public void setAssistenteMessageList(List<ChatMessage> assistenteMessageList) {
+        this.assistenteMessageList = assistenteMessageList;
     }
 }
