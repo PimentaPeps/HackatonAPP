@@ -16,6 +16,15 @@
             android:title="@string/produtos" />
     </group>
 
+    <item android:title="Chat">
+        <menu>
+            <item
+                android:id="@+id/chat"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Chat" />
+        </menu>
+    </item>
+
     <item android:title="Settings">
         <menu>
             <item
